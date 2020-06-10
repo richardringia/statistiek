@@ -1,6 +1,7 @@
 package com.rringia99.statistiek.kansrekening;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 
@@ -37,16 +38,6 @@ public class KansRekening {
 
         x_bar = x.divide(this.length, 10, RoundingMode.CEILING);
         y_bar = y.divide(this.length, 10, RoundingMode.CEILING);
-
-
-        System.out.println(x);
-        System.out.println(y);
-        System.out.println(xy);
-        System.out.println(x_bar);
-        System.out.println(y_bar);
-        System.out.println(x_square);
-        System.out.println(y_square);
-        System.out.println(this.a());
     }
 
     public String regressielijn() {
@@ -58,7 +49,11 @@ public class KansRekening {
     }
 
     public BigDecimal correlatie() {
+        BigDecimal r1 = xy.subtract(this.length.multiply(x_bar.multiply(y_bar)));
+        BigDecimal r2x = (x_square.subtract(this.length.multiply(x_bar.multiply(x_bar)))).sqrt(new MathContext(100));
+        BigDecimal r2y = (y_square.subtract(this.length.multiply(y_bar.multiply(y_bar)))).sqrt(new MathContext(100));
 
+        return r1.divide(r2x.multiply(r2y), 6, RoundingMode.CEILING);
     }
 
     private BigDecimal a() {

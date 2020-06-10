@@ -32,6 +32,7 @@ public class Main {
 
         System.out.println(kansRekening.regressielijn());
         System.out.println(kansRekening.regressielijnVoorspelling(new BigDecimal(100)));
+        System.out.println(kansRekening.correlatie());
 
 
     }
